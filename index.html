@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El camino de Felipe</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div class="title">El camino de Felipe</div>
+    <div class="badge" id="scoreBadge">⭐ 0</div>
+  </div>
+
+  <div id="screen-start" class="screen active">
+    <div class="card">
+      <div class="message">Ayuda a Felipe y Carlos</div>
+      <div class="row" style="margin: 12px 0;">
+        <button class="btn btn-accent big" id="btnPlay">Jugar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="screen-direction" class="screen">
+    <div class="card">
+      <div class="message" id="dirPrompt">Felipe debe ir hacia la DERECHA</div>
+      <div class="row">
+        <div class="grid" id="dirGrid"></div>
+        <div class="arrows">
+          <div></div>
+          <button class="btn btn-primary" data-dir="up">⬆️ Arriba</button>
+          <div></div>
+          <button class="btn btn-primary" data-dir="left">⬅️ Izquierda</button>
+          <div></div>
+          <button class="btn btn-primary" data-dir="right">➡️ Derecha</button>
+          <div></div>
+          <button class="btn btn-primary" data-dir="down">⬇️ Abajo</button>
+          <div></div>
+        </div>
+      </div>
+      <div class="spacer"></div>
+      <div class="feedback" id="dirFeedback"></div>
+      <div class="progress" id="dirProgress"></div>
+    </div>
+  </div>
+
+  <div id="screen-position" class="screen">
+    <div class="card">
+      <div class="message" id="posPrompt">¿La pelota está CERCA o LEJOS?</div>
+      <div class="row">
+        <div class="pos-area" id="posArea"></div>
+      </div>
+      <div class="spacer"></div>
+      <div class="choice-row">
+        <button class="btn btn-accent" data-choice="CERCA">CERCA</button>
+        <button class="btn btn-accent" data-choice="LEJOS">LEJOS</button>
+        <button class="btn btn-accent" data-choice="ARRIBA">ARRIBA</button>
+        <button class="btn btn-accent" data-choice="ABAJO">ABAJO</button>
+        <button class="btn btn-accent" data-choice="IZQUIERDA">IZQUIERDA</button>
+        <button class="btn btn-accent" data-choice="DERECHA">DERECHA</button>
+      </div>
+      <div class="spacer"></div>
+      <div class="feedback" id="posFeedback"></div>
+      <div class="progress" id="posProgress"></div>
+    </div>
+  </div>
+
+  <div id="screen-distance" class="screen">
+    <div class="card">
+      <div class="message" id="distPrompt">¿Cuál camino es MÁS LARGO?</div>
+      <div class="dist-area">
+        <div class="path" id="pathLeft">
+          <svg viewBox="0 0 100 100">
+            <path id="leftSvgPath" d="M10 90 L30 10 L60 60 L90 20" fill="none" stroke="var(--primary)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <button class="path-btn" data-side="left"></button>
+          <div class="badge path-label">A</div>
+        </div>
+        <div class="path" id="pathCenter">
+          <svg viewBox="0 0 100 100">
+            <path id="centerSvgPath" d="M12 85 L50 35 L88 85" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <button class="path-btn" data-side="center"></button>
+          <div class="badge path-label">B</div>
+        </div>
+        <div class="path" id="pathRight">
+          <svg viewBox="0 0 100 100">
+            <path id="rightSvgPath" d="M10 80 L50 20 L80 80" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <button class="path-btn" data-side="right"></button>
+          <div class="badge path-label">C</div>
+        </div>
+      </div>
+      <div class="spacer"></div>
+      <div class="feedback" id="distFeedback"></div>
+      <div class="progress" id="distProgress"></div>
+    </div>
+  </div>
+
+  <div id="screen-result" class="screen">
+    <div class="card" style="text-align:center;">
+      <div class="message">Resultado final</div>
+      <div class="stars" id="finalStars"></div>
+      <div id="finalText" class="big"></div>
+      <div class="spacer"></div>
+      <button class="btn btn-success" id="btnRestart">Jugar de nuevo</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js" defer></script>
+</body>
+</html>
