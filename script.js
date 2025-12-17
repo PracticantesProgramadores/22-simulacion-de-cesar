@@ -73,7 +73,7 @@ const LEVELS = [
       }
       return matrix;
     },
-    title: "Badera de olombia"
+    title: "Badera de Colombia"
   },
   {
     size: 12,
