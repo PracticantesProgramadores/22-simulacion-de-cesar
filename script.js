@@ -73,7 +73,7 @@ const LEVELS = [
       }
       return matrix;
     },
-    title: "Cohete espacial"
+    title: "Badera de olombia"
   },
   {
     size: 12,
@@ -103,7 +103,7 @@ const LEVELS = [
       }
       return matrix;
     },
-    title: "Zanahoria"
+    title: "Casa"
   },
   {
     size: 12,
@@ -133,7 +133,7 @@ const LEVELS = [
       }
       return matrix;
     },
-    title: "Rana feliz"
+    title: "Serpiente"
   },
   {
     size: 14,
@@ -168,7 +168,7 @@ const LEVELS = [
       }
       return matrix;
     },
-    title: "Anillo mágico"
+    title: "Cacha de futbol"
   },
   {
     size: 16,
@@ -202,7 +202,7 @@ const LEVELS = [
       }
       return matrix;
     },
-    title: "Donut delicioso"
+    title: "Tribal"
   }
 ];
 
