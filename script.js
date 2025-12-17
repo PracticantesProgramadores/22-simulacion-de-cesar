@@ -10,7 +10,7 @@ const COLORS = [
   { key: "B", name: "Azul", value: "#1e88e5" },
   { key: "P", name: "Morado", value: "#7c5cff" },
   { key: "K", name: "Negro", value: "#111111" },
-  { key: "W", name: "Gris claro", value: "#d9d9d9" }
+  { key: "W", name: "Gris claro", value: "#c5c5c5ff" }
 ];
 
 const modelGrid = document.getElementById("model-grid");
@@ -48,34 +48,49 @@ function setGridTemplate(el) {
 
 const LEVELS = [
   {
-    size: 12,
+    size: 10,
     build() {
-      const n = 12;
+      const mask = [
+        "..........",
+        ".YYYYYYYY.",
+        ".YYYYYYYY.",
+        ".YYYYYYYY.",
+        ".YYYYYYYY.",
+        ".BBBBBBBB.",
+        ".BBBBBBBB.",
+        ".RRRRRRRR.",
+        ".RRRRRRRR.",
+        ".........."
+      ];
+      const n = 10;
       const matrix = Array.from({ length: n }, () => Array.from({ length: n }, () => null));
       for (let i = 0; i < n; i++) {
-        const color = i < 6 ? "Y" : i < 9 ? "B" : "R";
-        for (let j = 0; j < n; j++) matrix[i][j] = color;
+        for (let j = 0; j < n; j++) {
+          const ch = mask[i][j] || ".";
+          if (ch === ".") continue;
+          matrix[i][j] = ch;
+        }
       }
       return matrix;
     },
-    title: "Bandera de Colombia"
+    title: "Cohete espacial"
   },
   {
     size: 12,
     build() {
       const mask = [
-        "............",
-        "....KKKK....",
-        "...KWWWWK...",
-        "..KWWWWWWK..",
-        "..KWWWWWWK..",
-        "..KWWWWWWK..",
-        "...KWWWWK...",
-        "....KWWK....",
-        ".....KK.....",
-        ".....KK.....",
-        "....BBBB....",
-        "............"
+        "CCCCCKKCCYYY",
+        "BBBBKKKKBBYY",
+        "CCCKKKKKKCCY",
+        "BBKKKKKKKKBB",
+        "CKKKKKKKKKKC",
+        "KKKKKKKKKKKK",
+        "BBKWWKKWWKBB",
+        "GGKWWKKWWKGG",
+        "GGKKKKKKKKGG",
+        "GGKKKWWKKKGG",
+        "GGKKKWWKKKGG",
+        "GGKKKWWKKKGG",
       ];
       const n = 12;
       const matrix = Array.from({ length: n }, () => Array.from({ length: n }, () => null));
@@ -88,73 +103,93 @@ const LEVELS = [
       }
       return matrix;
     },
-    title: "Vaso"
+    title: "Zanahoria"
+  },
+  {
+    size: 12,
+    build() {
+      const mask = [
+        "....KKKK....",
+        "...KGGGGK...",
+        "..KGGGGGGK..",
+        ".KGGGGGGGGK.",
+        "KGGGGGGGGGGK",
+        "KGRRGGGGRRGK",
+        "KGRRGGGGRRGK",
+        "KGGGGGGGGGGK",
+        ".KRRGGGGRRK.",
+        "..KGRRRRGK..",
+        "...KGGGGK...",
+        "....KKKK...."
+      ];
+      const n = 12;
+      const matrix = Array.from({ length: n }, () => Array.from({ length: n }, () => null));
+      for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+          const ch = mask[i][j] || ".";
+          if (ch === ".") continue;
+          matrix[i][j] = ch;
+        }
+      }
+      return matrix;
+    },
+    title: "Rana feliz"
   },
   {
     size: 14,
     build() {
+      const mask = [
+        "WWWWWWWWWWWWWW",
+        "WWGGWGGGGWGGWW",
+        "WGGGWWWWWWGGGW",
+        "WGGGGWWWWGGGGW",
+        "WGGGGGGGGGGGGW",
+        "WGGGGGGGGGGGGW",
+        "WGGGGWWWWGGGGW",
+        "WWWWWWGGWWWWWW",
+        "WGGGGWWWWGGGGW",
+        "WGGGGGGGGGGGGW",
+        "WGGGGWWWWGGGGW",
+        "WGGGWWWWWWGGGW",
+        "WWGGWGGGGWGGWW",
+        "WWWWWWWWWWWWWW",
+       
+        
+        
+      ];
       const n = 14;
       const matrix = Array.from({ length: n }, () => Array.from({ length: n }, () => null));
-      for (let i = 2; i < n - 2; i++) {
-        const j = 2 + ((i - 2) % (n - 4));
-        matrix[i][j] = "G";
-        if (j + 1 < n - 2) matrix[i][j + 1] = "G";
-      }
-      matrix[4][3] = "K";
-      matrix[4][4] = "K";
-      matrix[5][3] = "K";
-      matrix[5][4] = "K";
-      return matrix;
-    },
-    title: "Serpiente"
-  },
-  {
-    size: 16,
-    build() {
-      const n = 16;
-      const matrix = Array.from({ length: n }, () => Array.from({ length: n }, () => "G"));
-      for (let i = 1; i < n - 1; i++) {
-        matrix[1][i] = "W";
-        matrix[n - 2][i] = "W";
-        matrix[i][1] = "W";
-        matrix[i][n - 2] = "W";
-      }
-      const mid = Math.floor(n / 2);
-      for (let i = 2; i < n - 2; i++) {
-        matrix[mid][i] = "W";
-      }
-      const cx = mid, cy = mid;
-      const r = 3;
-      for (let i = 2; i < n - 2; i++) {
-        for (let j = 2; j < n - 2; j++) {
-          const d = Math.sqrt((i - cx) ** 2 + (j - cy) ** 2);
-          if (Math.abs(d - r) <= 0.6) matrix[i][j] = "W";
+      for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+          const ch = mask[i][j] || ".";
+          if (ch === ".") continue;
+          matrix[i][j] = ch;
         }
       }
       return matrix;
     },
-    title: "Cancha de fútbol"
+    title: "Anillo mágico"
   },
   {
     size: 16,
     build() {
       const mask = [
-        "....R..O..Y....",
-        "...RR.OO.YY....",
-        "..RRR.OOO.YY...",
-        ".RRRR.OOOO.YY..",
-        ".PYYY.BBBB.PP..",
-        ".PYYY.BBBB.PP..",
-        ".PPPP.BBBB.PP..",
-        ".PPPP.BBBB.PP..",
-        ".PPPP.BBBB.PP..",
-        ".PYYY.BBBB.PP..",
-        ".PYYY.BBBB.PP..",
-        ".RRRR.OOOO.YY..",
-        "..RRR.OOO.YY...",
-        "...RR.OO.YY....",
-        "....R..O..Y....",
-        "................"
+        "YYCCOOPPPPOOCCYY",
+        "YCCOOPPGGPPOOCCY",
+        "CCOOPPGGGGPPOOCC",
+        "COOPPGGYYGGPPOOC",
+        "OOPPGGYYYYGGPPOO",
+        "OPPGGYYCCYYGGPPO",
+        "OPPGGYYCCYYGGPPO",
+        "PPGGYYCPPCYYGGPP",
+        "PPGGYYCPPCYYGGPP",
+        "OPPGGYYCCYYGGPPO",
+        "OPPGGYYCCYYGGPPO",
+        "OOPPGGYYYYGGPPOO",
+        "COOPPGGYYGGPPOOC",
+        "CCOOPPGGGGPPOOCC",
+        "YCCOOPPGGPPOOCCY",
+        "YYCCOOPPPPOOCCYY"
       ];
       const n = 16;
       const matrix = Array.from({ length: n }, () => Array.from({ length: n }, () => null));
@@ -167,7 +202,7 @@ const LEVELS = [
       }
       return matrix;
     },
-    title: "Patrón tribal"
+    title: "Donut delicioso"
   }
 ];
 
